@@ -12,17 +12,17 @@ def weather(request):
 	try:
 		if cityname is None:
 			context = {
-						'date':datetime.now,
-						'celsius':'NA-/',
-						'country':'NA-/',
-						'celsius':'NA-/',
-						'fahrenheit':'NA-/',
-						'feel':'NA-/',
-						'wind_speed':'NA-/',
-						'weather':'NA-/',
-						'pressure':'NA-/',
-						'humidity':'NA-/',
-						'visibility':'NA-/'}
+						'date': datetime.now,
+						'celsius': 'NA-/',
+						'country': 'NA-/',
+						'celsius': 'NA-/',
+						'fahrenheit': 'NA-/',
+						'feel': 'NA-/',
+						'wind_speed': 'NA-/',
+						'weather': 'NA-/',
+						'pressure': 'NA-/',
+						'humidity': 'NA-/',
+						'visibility': 'NA-/'}
 			return render(request, 'weather.html', context)
 		else:
 			response = requests.get(url + cityname + '&appid=' + api_key).json()
@@ -50,7 +50,7 @@ def weather(request):
 			visibility_5 = []
 			date_5 = []
 
-			for i in range(0,40):
+			for i in range(0, 40):
 				cel_5.append(next_5_day_url_response['list'][i:i+1][0]['main']['temp_max'] - 273.15)
 				fr_5.append(cel_5[i] * 9 / 5 + 32)
 				wind_speed_5.append(next_5_day_url_response['list'][i:i+1][0]['wind']['speed'])
@@ -60,7 +60,7 @@ def weather(request):
 				visibility_5.append(next_5_day_url_response['list'][i:i+1][0]['visibility'])
 				date_5.append(next_5_day_url_response['list'][i:i+1][0]['dt_txt'])
 
-			five_days_data =  list(zip(cel_5,fr_5,wind_speed_5,weather_5,pressure_5,humidity_5,visibility_5,date_5))
+			five_days_data =  list(zip(cel_5, fr_5, wind_speed_5, weather_5, pressure_5, humidity_5, visibility_5, date_5))
 
 			context = {'date': datetime.now,
 						'celsius': cel,
